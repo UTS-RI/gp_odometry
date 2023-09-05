@@ -1,0 +1,6 @@
+numpy
+open3d
+scipy
+scikit-learn
+pykeops
+pypcd @ git+https://github.com/clegenti/pypcd.git@master

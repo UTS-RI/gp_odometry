@@ -1,0 +1,29 @@
+<launch>
+
+    <!-- declare arg to be passed in -->
+    <arg name="voxel_size" default="0.02" /> 
+    <arg name="max_range" default="1.5" />
+    <arg name="use_keops" default="true" />
+    <arg name="max_freq" default="3" />
+    <arg name="pc_topic" default="/camera/rgb/points" />
+
+
+    <node name="gp_odometry" pkg="gp_odometry" type="gp_odometry.py" output="screen">
+        <param name="use_keops"     type="bool"     value="$(arg use_keops)" />
+        <param name="voxel_size"    type="double"   value="$(arg voxel_size)" />
+        <param name="max_range"     type="double"   value="$(arg max_range)" />
+        <remap from="/points" to="/coarse_odometry/points"/>
+        <remap from="/relative_pose" to="/coarse_odometry/relative_pose"/>
+    </node>
+    <node name="coarse_odometry" pkg="gp_odometry" type="coarse_odometry.py" output="screen">
+        <param name="use_keops"     type="bool"     value="$(arg use_keops)" />
+        <param name="voxel_size"    type="double"   value="$(arg voxel_size)" />
+        <param name="max_range"     type="double"   value="$(arg max_range)" />
+        <remap from="/points" to="/points_low_freq"/>
+    </node>
+    <node name="pc_freq_downsample" pkg="gp_odometry" type="pc_freq_downsample.py" output="screen">
+        <param name="max_freq" type="double" value="$(arg max_freq)" />
+        <remap from="/points" to="$(arg pc_topic)"/>
+    </node>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gp_odometry)/cfg/gp_odometry.rviz" />
+</launch>
