@@ -19,9 +19,7 @@ If you are using this work please cite the corresponding papers as explained at 
 
 
 
-
-https://github.com/UTS-CAS/gp_odometry/assets/18108165/3bbaa939-a780-4180-a682-69182f5b7a92
-
+![](gif/gp_odometry_teddy_bear_real_time.gif)
 
 
 
