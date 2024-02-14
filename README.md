@@ -1,5 +1,7 @@
 # GP Distance Field Odometry
 
+New: the folder `paper_scripts` contains a python code to repeat the paper results with the RQ kernel along the gradient inference and the uncertainty proxy.
+
 The code present in this repository is an application of the accurate distance field based on Gaussian Processes (GPs) presented [here](https://arxiv.org/abs/2302.13005).
 Using RGB-D scans from a depth camera, the camera pose is estimated using solely geometric information.
 The map of the environment is built/maintained in a sparse voxel grid with naive fusion (centroid of the points in each cell) and simplistic pruning rules.
